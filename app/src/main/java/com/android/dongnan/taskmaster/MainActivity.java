@@ -2,6 +2,7 @@ package com.android.dongnan.taskmaster;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
@@ -12,5 +13,9 @@ public class MainActivity extends Activity {
 
         getFragmentManager().beginTransaction().replace(R.id.container,
                 new MainFragment()).commit();
+
+        View view = findViewById(R.id.container);
+        view.setOnClickListener(v->{});
+
     }
 }
