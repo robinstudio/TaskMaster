@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.android.dongnan.taskmaster"
-        minSdkVersion 18
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
