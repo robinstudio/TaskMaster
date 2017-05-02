@@ -1,6 +1,5 @@
 package com.android.dongnan.taskmaster;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -11,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.dongnan.taskmaster.data.DataItem;
+import com.android.dongnan.taskmaster.data.DataConstants;
 
 import java.util.ArrayList;
 
@@ -21,18 +20,16 @@ import java.util.ArrayList;
  * Good Luck
  */
 
-public class MainFragment extends Fragment {
+public class MainFragment extends android.support.v4.app.Fragment {
     private static final String TAG = MainFragment.class.getSimpleName();
 
     private LayoutInflater mLayoutInflater;
     private DataAdapter mDataAdapter;
-    private ArrayList<DataItem> mDataItems;
+    private ArrayList<DataConstants.StoryData> mDatas = new ArrayList<>();
 
     public MainFragment() {
-        mDataItems = new ArrayList<>();
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mLayoutInflater = inflater;
@@ -40,15 +37,19 @@ public class MainFragment extends Fragment {
         ListView listView = (ListView)view.findViewById(R.id.listView);
         mDataAdapter = new DataAdapter();
         listView.setAdapter(mDataAdapter);
-        updateData();
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        updateData();
     }
 
     public void updateData() {
         Log.v(TAG, "updateData");
         for(int i=0; i<10; i++) {
-            mDataItems.add(DataItem.getInstance().setTitle("Title-" + i)
-                .setContent("Content-" + i));
+            mDatas.add(DataConstants.createTestStory(i));
         }
         mDataAdapter.notifyDataSetChanged();
     }
@@ -57,12 +58,12 @@ public class MainFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return mDataItems.size();
+            return mDatas.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return mDataItems.get(position);
+            return mDatas.get(position);
         }
 
         @Override
@@ -83,9 +84,9 @@ public class MainFragment extends Fragment {
                 holder = (ViewHolder)convertView.getTag();
             }
 
-            DataItem item = mDataItems.get(position);
-            holder.title.setText(item.getTitle());
-            holder.content.setText(item.getContent());
+            DataConstants.StoryData item = mDatas.get(position);
+            holder.title.setText(item.title);
+            holder.content.setText(item.content);
             return convertView;
         }
     }
