@@ -29,10 +29,10 @@ public class EditFragment extends Fragment {
     public EditFragment() {
         Bundle bundle = getArguments();
         int id = bundle.getInt(DataConstants.StoryTable.ID);
-        ArrayList<DataConstants.StoryData> datas = DataManager.queryStory(DataConstants.StoryTable.ID + "=?",
+        ArrayList<DataConstants.StoryData> dataList = DataManager.queryStory(DataConstants.StoryTable.ID + "=?",
                 new String[] {String.valueOf(id)});
-        if (datas != null && !datas.isEmpty()) {
-            mData = datas.get(0);
+        if (dataList != null && !dataList.isEmpty()) {
+            mData = dataList.get(0);
         } else {
             mData = DataConstants.StoryData.builder();
         }

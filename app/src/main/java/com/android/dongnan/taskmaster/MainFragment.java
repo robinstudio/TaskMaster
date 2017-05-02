@@ -26,7 +26,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
     private LayoutInflater mLayoutInflater;
     private DataAdapter mDataAdapter;
-    private ArrayList<DataConstants.StoryData> mDatas = new ArrayList<>();
+    private ArrayList<DataConstants.StoryData> mDataList = new ArrayList<>();
     private DataConstants.ActivityCallback mCallback;
 
     public MainFragment() {
@@ -42,7 +42,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ListView listView = (ListView)view.findViewById(R.id.listView);
         listView.setOnItemClickListener((AdapterView<?> parent, View view1, int position, long id) -> {
-            mCallback.onItemClicked(mDatas.get(position));
+            mCallback.onItemClicked(mDataList.get(position));
         });
         mDataAdapter = new DataAdapter();
         listView.setAdapter(mDataAdapter);
@@ -58,7 +58,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     public void updateData() {
         Log.v(TAG, "updateData");
         for(int i=0; i<10; i++) {
-            mDatas.add(DataConstants.createTestStory(i));
+            mDataList.add(DataConstants.createTestStory(i));
         }
         mDataAdapter.notifyDataSetChanged();
     }
@@ -67,12 +67,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
         @Override
         public int getCount() {
-            return mDatas.size();
+            return mDataList.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return mDatas.get(position);
+            return mDataList.get(position);
         }
 
         @Override
@@ -93,7 +93,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
                 holder = (ViewHolder)convertView.getTag();
             }
 
-            DataConstants.StoryData item = mDatas.get(position);
+            DataConstants.StoryData item = mDataList.get(position);
             holder.title.setText(item.title);
             holder.content.setText(item.content);
             return convertView;

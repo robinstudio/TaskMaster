@@ -60,7 +60,7 @@ public class DataConstants {
         if (cursor == null || cursor.getCount() == 0) {
             return null;
         }
-        ArrayList<StoryData> datas = new ArrayList<>();
+        ArrayList<StoryData> dataList = new ArrayList<>();
         cursor.moveToFirst();
         do {
             StoryData data = StoryData.builder()
@@ -72,11 +72,11 @@ public class DataConstants {
                     .setContent(cursor.getString(cursor.getColumnIndex(StoryTable.CONTENT)))
                     .setComment(cursor.getString(cursor.getColumnIndex(StoryTable.COMMENT)))
                     .setResult(cursor.getString(cursor.getColumnIndex(StoryTable.RESULT)));
-            datas.add(data);
+            dataList.add(data);
         } while (cursor.moveToNext());
         cursor.close();
 
-        return datas;
+        return dataList;
     }
 
     public static StoryData createTestStory(int index) {
