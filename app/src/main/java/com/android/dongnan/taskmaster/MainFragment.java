@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,8 +27,13 @@ public class MainFragment extends android.support.v4.app.Fragment {
     private LayoutInflater mLayoutInflater;
     private DataAdapter mDataAdapter;
     private ArrayList<DataConstants.StoryData> mDatas = new ArrayList<>();
+    private DataConstants.ActivityCallback mCallback;
 
     public MainFragment() {
+    }
+
+    public void registerCallback(DataConstants.ActivityCallback callback) {
+        mCallback = callback;
     }
 
     @Override
@@ -35,6 +41,9 @@ public class MainFragment extends android.support.v4.app.Fragment {
         mLayoutInflater = inflater;
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ListView listView = (ListView)view.findViewById(R.id.listView);
+        listView.setOnItemClickListener((AdapterView<?> parent, View view1, int position, long id) -> {
+            mCallback.onItemClicked(mDatas.get(position));
+        });
         mDataAdapter = new DataAdapter();
         listView.setAdapter(mDataAdapter);
         return view;

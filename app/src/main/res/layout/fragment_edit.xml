@@ -8,6 +8,28 @@
     app:layout_scrollFlags="scroll">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_height"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Save" />
+
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Cancel" />
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/edit_info"

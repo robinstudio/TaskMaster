@@ -24,6 +24,7 @@ public class EditFragment extends Fragment {
 
     private DataConstants.StoryData mData;
     private View mContentView;
+    private DataConstants.ActivityCallback mCallback;
 
     public EditFragment() {
         Bundle bundle = getArguments();
@@ -37,12 +38,23 @@ public class EditFragment extends Fragment {
         }
     }
 
+    public void registerCallback(DataConstants.ActivityCallback callback) {
+        mCallback = callback;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         mContentView = inflater.inflate(R.layout.fragment_edit, container, false);
-        updateView();
+        mContentView.findViewById(R.id.save).setOnClickListener((v -> {
+            saveData();
+            mCallback.onDataChanged();
+        }));
+        mContentView.findViewById(R.id.cancel).setOnClickListener(v -> {
+            mCallback.onDataChanged();
+        });
+        updateView(mData);
         return mContentView;
     }
 
@@ -69,7 +81,8 @@ public class EditFragment extends Fragment {
         }
     }
 
-    public void updateView() {
+    public void updateView(DataConstants.StoryData data) {
+        mData = data;
         updateEditText(R.id.title, mData.title);
         updateEditText(R.id.comment, mData.comment);
         updateEditText(R.id.content, mData.content);

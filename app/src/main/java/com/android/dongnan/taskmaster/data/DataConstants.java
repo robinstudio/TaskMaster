@@ -154,4 +154,9 @@ public class DataConstants {
             return (this.id != -1) && (this.id == data.id);
         }
     }
+
+    public interface ActivityCallback {
+        void onItemClicked(DataConstants.StoryData data);
+        void onDataChanged();
+    }
 }
