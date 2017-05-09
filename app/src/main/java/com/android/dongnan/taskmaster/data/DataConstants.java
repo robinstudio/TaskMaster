@@ -157,6 +157,7 @@ public class DataConstants {
 
     public interface ActivityCallback {
         void onItemClicked(DataConstants.StoryData data);
+
         void onDataChanged();
     }
 }

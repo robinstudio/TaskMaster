@@ -11,7 +11,7 @@ import android.view.Menu;
 import com.android.dongnan.taskmaster.data.CommonHolder;
 import com.android.dongnan.taskmaster.data.DataConstants;
 
-public class MainActivity extends AppCompatActivity implements DataConstants.ActivityCallback{
+public class MainActivity extends AppCompatActivity implements DataConstants.ActivityCallback {
 
     private MainFragment mMainFragment;
     private EditFragment mEditFragment;

@@ -57,7 +57,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
     public void updateData() {
         Log.v(TAG, "updateData");
-        for(int i=0; i<10; i++) {
+        for (int i = 0; i < 10; i++) {
             mDataList.add(DataConstants.createTestStory(i));
         }
         mDataAdapter.notifyDataSetChanged();
@@ -101,7 +101,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     }
 
     private static class ViewHolder {
-        TextView title;
-        TextView content;
+        public TextView title;
+        public TextView content;
     }
 }
